@@ -1,5 +1,6 @@
---Check if its necessary to describe all columns to insert data at all columns
---Check if to_date result is valid
+ALTER SESSION SET CONTAINER = FREEPDB1;
+ALTER SESSION SET CURRENT_SCHEMA = cac;
+COMMIT;
 
 INSERT INTO students(first_name,last_name,register_date,siiau_code)
 VALUES('Ivan','Barba macias',TO_DATE('2020 Feb 01','YYYY MON DD'),'219747662');
@@ -53,3 +54,4 @@ VALUES(NULL,3,0);
 
 INSERT INTO contests
 VALUES(DEFAULT,7,DEFAULT,0);
+COMMIT;
