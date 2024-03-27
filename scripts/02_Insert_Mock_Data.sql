@@ -32,24 +32,24 @@ INSERT INTO code_profiles(platform,identifier,student_id)
 VALUES('VJudge','ivanbm8',0);
 
 INSERT INTO classes
-VALUES('Strings I','Introduccion a Strings', TO_DATE('2024 FEB 07','YYYY MON DD'),0);
+VALUES(NULL,'Strings I','Introduccion a Strings', TO_DATE('2024 FEB 07','YYYY MON DD'),0);
 INSERT INTO classes
-VALUES('Estructuras de Datos I','Stack, Queue, Deque, Map', TO_DATE('2024 JAN 31','YYYY MON DD'),0);
+VALUES(NULL,'Estructuras de Datos I','Stack, Queue, Deque, Map', TO_DATE('2024 JAN 31','YYYY MON DD'),0);
 
 INSERT INTO class_resources
-VALUES('U',null,null,'https://codeforces.com/group/cG3CULqTG9/contest/510084',
+VALUES(NULL,'U',null,null,'https://codeforces.com/group/cG3CULqTG9/contest/510084',
 'CodeForces URL to Contest', DEFAULT,0,0);
 
 INSERT INTO attendances
-VALUES(0,0);
+VALUES(NULL,0,0);
 INSERT INTO attendances
-VALUES(0,1);
+VALUES(NULL,0,1);
 INSERT INTO attendances
-VALUES(2,0);
+VALUES(NULL,2,0);
 INSERT INTO attendances
-VALUES(2,1);
+VALUES(NULL,2,1);
 INSERT INTO attendances
-VALUES(3,0);
+VALUES(NULL,3,0);
 
 INSERT INTO contests
-VALUES(7,DEFAULT,0);
+VALUES(DEFAULT,7,DEFAULT,0);
