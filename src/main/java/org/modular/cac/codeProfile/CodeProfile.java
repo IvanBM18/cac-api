@@ -20,15 +20,12 @@ import javax.persistence.Table;
 public class CodeProfile {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequence-generator")
-    @SequenceGenerator(name = "student_id_squence",sequenceName = "code_profile_sequence",initialValue = 0,allocationSize = 1)
     private Long id;
     @Column(nullable = false)
     private String platform;
     @Column(nullable = false)
     private String identifier;
-    @ManyToOne
-    @JoinColumn(name = "student_id")
-    private Student student;
+    @Column(nullable = false)
+    private Long student_id;
 
 }

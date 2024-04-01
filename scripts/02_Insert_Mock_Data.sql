@@ -1,6 +1,8 @@
-ALTER SESSION SET CONTAINER = FREEPDB1;
-ALTER SESSION SET CURRENT_SCHEMA = cac;
-COMMIT;
+--ALTER SESSION SET CONTAINER = FREEPDB1;
+--ALTER SESSION SET CURRENT_SCHEMA = api;
+--COMMIT;
+
+ALTER SESSION SET CONTAINER = CACDB;
 
 INSERT INTO students(first_name,last_name,register_date,siiau_code)
 VALUES('Ivan','Barba macias',TO_DATE('2020 Feb 01','YYYY MON DD'),'219747662');
@@ -16,16 +18,10 @@ VALUES('Argenis','Algo Robles',TO_DATE('2024 Aug 31','YYYY MON DD'),'216101010')
 INSERT INTO users(email,password,student_id)
 VALUES ('ivanbarba.m@gmail.com','123456',0);
 
-INSERT INTO groups (group_name,student_id)
-VALUES('Basicos',0);
-INSERT INTO groups (group_name,student_id)
-VALUES('Intermedios',0);
-INSERT INTO groups (group_name,student_id)
-VALUES('Basicos',1);
-INSERT INTO groups (group_name,student_id)
-VALUES('Basicos',2);
-INSERT INTO groups (group_name,student_id)
-VALUES('Basicos',3);
+INSERT INTO groups
+VALUES(DEFAULT,'Basicos');
+INSERT INTO groups
+VALUES(DEFAULT,'Intermedios');
 
 INSERT INTO code_profiles(platform,identifier,student_id)
 VALUES('CodeForces','ivanbm',0);
@@ -33,9 +29,9 @@ INSERT INTO code_profiles(platform,identifier,student_id)
 VALUES('VJudge','ivanbm8',0);
 
 INSERT INTO classes
-VALUES(NULL,'Strings I','Introduccion a Strings', TO_DATE('2024 FEB 07','YYYY MON DD'),0);
+VALUES(NULL,'Strings I','Introduccion a Strings', TO_DATE('2024 FEB 07','YYYY MON DD'),0,0);
 INSERT INTO classes
-VALUES(NULL,'Estructuras de Datos I','Stack, Queue, Deque, Map', TO_DATE('2024 JAN 31','YYYY MON DD'),0);
+VALUES(NULL,'Estructuras de Datos I','Stack, Queue, Deque, Map', TO_DATE('2024 JAN 31','YYYY MON DD'),0,0);
 
 INSERT INTO class_resources
 VALUES(NULL,'U',null,null,'https://codeforces.com/group/cG3CULqTG9/contest/510084',

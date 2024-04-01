@@ -21,8 +21,6 @@ public class Student {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequence-generator")
-    @SequenceGenerator(name = "student_id_squence",sequenceName = "student_pk_sequence",initialValue = 0,allocationSize = 1)
     private Long student_id;
     private String firstName;
     private String lastName;
