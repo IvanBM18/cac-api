@@ -1,4 +1,4 @@
-package org.modular.cac.student;
+package org.modular.cac.models;
 
 
 import lombok.AllArgsConstructor;

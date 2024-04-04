@@ -1,5 +1,6 @@
 package org.modular.cac.student;
 
+import org.modular.cac.models.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

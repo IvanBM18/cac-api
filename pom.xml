@@ -58,6 +58,16 @@
       <artifactId>ojdbc8-production</artifactId>
       <version>19.18.0.0</version>
       <type>pom</type>
+      <exclusions>
+        <exclusion>
+          <groupId>com.oracle.database.ha</groupId>
+          <artifactId>simplefan</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>com.oracle.database.ha</groupId>
+          <artifactId>ons</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
 
     <dependency>
