@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.*;
@@ -17,7 +18,7 @@ import jakarta.persistence.*;
 public class Student {
 
     public Student(){
-        this.registerDate = LocalDateTime.now();
+        this.registerDate = LocalDate.now();
     }
 
     @Id
@@ -26,8 +27,8 @@ public class Student {
     private String lastName;
     @Column(unique = true)
     private String siiauCode;
-    @Temporal(TemporalType.TIMESTAMP)
-    private LocalDateTime registerDate;
+    @Temporal(TemporalType.DATE)
+    private LocalDate registerDate;
 
     @Override
     public String toString() {
