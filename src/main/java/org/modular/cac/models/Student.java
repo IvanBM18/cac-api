@@ -9,6 +9,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.IdGeneratorType;
+import org.hibernate.id.IdentityGenerator;
 
 @Getter
 @Setter
@@ -22,6 +24,7 @@ public class Student {
     }
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long student_id;
     private String firstName;
     private String lastName;
@@ -39,5 +42,9 @@ public class Student {
                 ", siiauCode='" + siiauCode + '\'' +
                 ", registerDate=" + registerDate +
                 '}';
+    }
+
+    public boolean isValid(){
+        return  siiauCode.length() == 9;
     }
 }

@@ -18,7 +18,7 @@ public class Classes {
     @Column(nullable = false)
     private String name;
     private String description;
-    @Temporal(TemporalType.TIMESTAMP)//TODO change this at DB
+    @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime classDate;
     private Long groupId;
     private Long professorId;

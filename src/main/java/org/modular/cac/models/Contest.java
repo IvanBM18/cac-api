@@ -19,7 +19,7 @@ public class Contest {
     private Long contestId;
     @Column(nullable = false)
     private Integer totalProblems;
-    @Temporal(TemporalType.TIMESTAMP) //TODO Change this at DB
+    @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime startDate;
     @Column(nullable = false)
     private Long resourceId;
