@@ -1,10 +1,14 @@
 package org.modular.cac.student;
 
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.query.Page;
 import org.modular.cac.models.Student;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,8 +23,8 @@ public class StudentService {
     }
 
 
-    public List<Student> getStudents() {
-        return repository.findAll();
+    public List<Student> getStudents(Pageable page) {
+        return repository.findAll(page).stream().toList();
     }
 
     public Optional<Student> searchStudent(Long id){

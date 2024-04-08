@@ -2,6 +2,8 @@ package org.modular.cac.student;
 
 import org.modular.cac.models.Student;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,8 +20,10 @@ public class StudentController {
     }
 
     @GetMapping
-    public List<Student> getStudents(){
-        return service.getStudents();
+    public List<Student> getStudents(@RequestParam(name = "page",defaultValue = "0")int page,
+                                     @RequestParam(name = "size",defaultValue = "20")int size){
+        Pageable pagedRequest = PageRequest.of(page,size);
+        return service.getStudents(pagedRequest);
     }
 
     @GetMapping(path = "/{id}")
