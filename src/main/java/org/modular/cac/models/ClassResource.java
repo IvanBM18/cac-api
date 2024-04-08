@@ -16,6 +16,7 @@ public class ClassResource {
     public ClassResource(){this.uploadDate = LocalDateTime.now(); }
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long resourceId;
     @Column(nullable = false)
     private char contentType;

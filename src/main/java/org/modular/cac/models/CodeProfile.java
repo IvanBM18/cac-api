@@ -15,6 +15,7 @@ import javax.persistence.Table;
 public class CodeProfile {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false)
     private String platform;
