@@ -1,8 +1,8 @@
---ALTER SESSION SET CONTAINER = FREEPDB1;
---ALTER SESSION SET CURRENT_SCHEMA = api;
+ALTER SESSION SET CONTAINER = FREEPDB1;
+ALTER SESSION SET CURRENT_SCHEMA = cac;
 --COMMIT;
 
-ALTER SESSION SET CONTAINER = CACDB;
+--ALTER SESSION SET CONTAINER = CACDB;
 
 INSERT INTO students(first_name,last_name,register_date,siiau_code)
 VALUES('Ivan','Barba macias',TO_DATE('2020 Feb 01','YYYY MON DD'),'219747662');
@@ -29,24 +29,24 @@ INSERT INTO code_profiles(platform,identifier,student_id)
 VALUES('VJudge','ivanbm8',0);
 
 INSERT INTO classes
-VALUES(NULL,'Strings I','Introduccion a Strings', TO_DATE('2024 FEB 07','YYYY MON DD'),0,0);
+VALUES(DEFAULT,'Strings I','Introduccion a Strings', TO_DATE('2024 FEB 07','YYYY MON DD'),0,0);
 INSERT INTO classes
-VALUES(NULL,'Estructuras de Datos I','Stack, Queue, Deque, Map', TO_DATE('2024 JAN 31','YYYY MON DD'),0,0);
+VALUES(DEFAULT,'Estructuras de Datos I','Stack, Queue, Deque, Map', TO_DATE('2024 JAN 31','YYYY MON DD'),0,0);
 
 INSERT INTO class_resources
 VALUES(NULL,'U',null,null,'https://codeforces.com/group/cG3CULqTG9/contest/510084',
 'CodeForces URL to Contest', DEFAULT,0,0);
 
 INSERT INTO attendances
-VALUES(NULL,0,0);
+VALUES(DEFAULT,0,0);
 INSERT INTO attendances
-VALUES(NULL,0,1);
+VALUES(DEFAULT,0,1);
 INSERT INTO attendances
-VALUES(NULL,2,0);
+VALUES(DEFAULT,2,0);
 INSERT INTO attendances
-VALUES(NULL,2,1);
+VALUES(DEFAULT,2,1);
 INSERT INTO attendances
-VALUES(NULL,3,0);
+VALUES(DEFAULT,3,0);
 
 INSERT INTO contests
 VALUES(DEFAULT,7,DEFAULT,0);

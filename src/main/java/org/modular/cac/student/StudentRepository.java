@@ -12,6 +12,10 @@ import java.util.Optional;
 public interface StudentRepository extends PagingAndSortingRepository<Student,Long>, CrudRepository<Student,Long> {
 
 
-    @Query("Select s from Student s WHERE s.siiauCode = ?1")
+    @Query( value = "Select * from Students s WHERE s.siiau_code = ?1"
+    ,nativeQuery = true)
     Optional<Student> findBySiiauCode(String code);
+
+//    @Query("Select s,g.group as group FROM Student s JOIN groups")
+//    Page<Student> findAllWithGroup(Pageable pageable);
 }

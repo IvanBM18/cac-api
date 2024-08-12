@@ -5,22 +5,19 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.IdGeneratorType;
-import org.hibernate.id.IdentityGenerator;
 
 @Getter
 @Setter
 @AllArgsConstructor
-@Entity
+@Entity(name = "students")
 @Table(name = "students")
 public class Student {
 
     public Student(){
-        this.registerDate = LocalDate.now();
+        this.registerDate = LocalDateTime.now();
     }
 
     @Id
@@ -30,12 +27,12 @@ public class Student {
     private String lastName;
     @Column(unique = true)
     private String siiauCode;
-    @Temporal(TemporalType.DATE)
-    private LocalDate registerDate;
+    @Temporal(TemporalType.TIMESTAMP)
+    private LocalDateTime registerDate;
 
     @Override
     public String toString() {
-        return "Student{" +
+        return "{" +
                 "id=" + student_id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
@@ -45,6 +42,6 @@ public class Student {
     }
 
     public boolean isValid(){
-        return  siiauCode.length() == 9;
+        return  siiauCode.length() ==  9;
     }
 }

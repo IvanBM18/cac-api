@@ -3,25 +3,24 @@ package org.modular.cac.models;
 import jakarta.persistence.*;
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
+@Entity(name = "code_profiles")
 @Table(name = "code_profiles")
 public class CodeProfile {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long code_profile_id;
     @Column(nullable = false)
     private String platform;
     @Column(nullable = false)
     private String identifier;
-    @Column(nullable = false)
-    private Long student_id;
+
+    @OneToOne
+    @JoinColumn(name = "student_id")
+    private Student student;
 
 }

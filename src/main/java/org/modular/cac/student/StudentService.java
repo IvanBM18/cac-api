@@ -32,11 +32,21 @@ public class StudentService {
     }
 
     public void addStudent(Student student){
+        if(student.getStudent_id() != null){
+            throw  new IllegalArgumentException("Student must have empty id for creation");
+        }
         if(repository.findBySiiauCode(student.getSiiauCode()).isPresent()){
             throw new IllegalStateException("Siiau Code taken");
         }
         if(!student.isValid()){
             throw new IllegalArgumentException("Invalid Siiau Code");
+        }
+        repository.save(student);
+    }
+
+    public void updateStudent(Student student){
+        if(student.getStudent_id() == null ||  repository.findById(student.getStudent_id()).isEmpty()){
+            throw new IllegalArgumentException("Non Existent Student");
         }
         repository.save(student);
     }

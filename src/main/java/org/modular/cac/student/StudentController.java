@@ -32,8 +32,13 @@ public class StudentController {
     }
 
     @PostMapping
-    public void addnewStudent(@RequestBody Student student){
-        service.addStudent(student);
+    public void addnewStudent(@RequestBody Student newStudent){
+        service.addStudent(newStudent);
+    }
+
+    @PutMapping
+    public void updateStudent(@RequestBody Student student){
+        service.updateStudent(student);
     }
 
 }
