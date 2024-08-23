@@ -1,5 +1,6 @@
 package org.modular.cac.student;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.modular.cac.models.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -10,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/student")
+@Tag(name = "Students",description = "API for CAC Students")
 public class StudentController {
 
     private final StudentService service;

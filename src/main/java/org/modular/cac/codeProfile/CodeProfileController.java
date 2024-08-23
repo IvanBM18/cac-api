@@ -1,7 +1,7 @@
 package org.modular.cac.codeProfile;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.modular.cac.models.CodeProfile;
-import org.modular.cac.models.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -14,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/codeProfile")
+@Tag(name = "Code Profiles",description = "API for Code profiles")
 public class CodeProfileController {
 
     @Autowired
