@@ -1,4 +1,4 @@
-package org.modular.cac.redirect;
+package org.modular.cac.endpoints.redirect;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;

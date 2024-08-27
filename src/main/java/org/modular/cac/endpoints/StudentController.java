@@ -1,7 +1,8 @@
-package org.modular.cac.student;
+package org.modular.cac.endpoints;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.modular.cac.models.Student;
+import org.modular.cac.student.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
