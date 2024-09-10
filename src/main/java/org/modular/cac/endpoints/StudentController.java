@@ -39,10 +39,6 @@ public class StudentController {
         return service.searchStudentByCode(siiauCode).orElse(new Student());
     }
 
-    @GetMapping(path = "/{name}")
-    public List<Student> getStudentsByName(@PathVariable("name")String name){
-        return service.searchStudentsByName(name);
-    }
 
 
     @PostMapping
