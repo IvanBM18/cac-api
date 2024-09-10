@@ -34,12 +34,12 @@ public class StudentController {
         return service.searchStudent(id).orElse(new Student());
     }
 
-    @GetMapping(path = "{siiauCode")
+    @GetMapping(path = "/{siiauCode")
     public Student getStudentByCode(@PathVariable("siiauCode")String siiauCode){
         return service.searchStudentByCode(siiauCode).orElse(new Student());
     }
 
-    @GetMapping(path = "{name}")
+    @GetMapping(path = "/{name}")
     public List<Student> getStudentsByName(@PathVariable("name")String name){
         return service.searchStudentsByName(name);
     }
