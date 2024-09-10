@@ -1,6 +1,7 @@
 package org.modular.cac.models;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -41,6 +42,7 @@ public class Student {
                 '}';
     }
 
+    @JsonIgnore
     public boolean isValid(){
         return  siiauCode.length() ==  9;
     }

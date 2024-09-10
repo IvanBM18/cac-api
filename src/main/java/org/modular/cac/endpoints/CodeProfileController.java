@@ -1,6 +1,7 @@
-package org.modular.cac.codeProfile;
+package org.modular.cac.endpoints;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.modular.cac.codeProfile.CodeProfileService;
 import org.modular.cac.models.CodeProfile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;

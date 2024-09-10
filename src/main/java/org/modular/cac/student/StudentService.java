@@ -1,14 +1,11 @@
 package org.modular.cac.student;
 
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.query.Page;
 import org.modular.cac.models.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,12 +28,20 @@ public class StudentService {
         return repository.findById(id);
     }
 
+    public Optional<Student> searchStudentByCode(String siiauCode){
+        return repository.findBySiiauCode(siiauCode);
+    }
+
+    public List<Student> searchStudentsByName(String name){
+        return repository.findByName(name);
+    }
+
     public void addStudent(Student student){
         if(student.getStudent_id() != null){
             throw  new IllegalArgumentException("Student must have empty id for creation");
         }
         if(repository.findBySiiauCode(student.getSiiauCode()).isPresent()){
-            throw new IllegalStateException("Siiau Code taken");
+            throw new IllegalStateException("Siiau Code already taken by another student");
         }
         if(!student.isValid()){
             throw new IllegalArgumentException("Invalid Siiau Code");
@@ -44,10 +49,19 @@ public class StudentService {
         repository.save(student);
     }
 
+
     public void updateStudent(Student student){
         if(student.getStudent_id() == null ||  repository.findById(student.getStudent_id()).isEmpty()){
             throw new IllegalArgumentException("Non Existent Student");
         }
         repository.save(student);
+    }
+
+    public boolean deleteStudent(Long id){
+        if(searchStudent(id).isPresent()){
+            repository.deleteById(id);
+            return true;
+        }
+        throw new IllegalStateException("Non Existent Student Id");
     }
 }

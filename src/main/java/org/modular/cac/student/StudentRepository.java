@@ -6,6 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -15,6 +16,12 @@ public interface StudentRepository extends PagingAndSortingRepository<Student,Lo
     @Query( value = "Select * from Students s WHERE s.siiau_code = ?1"
     ,nativeQuery = true)
     Optional<Student> findBySiiauCode(String code);
+
+    @Query( value = "Select * FROM Students s " +
+            "WHERE (Select s.first_name || s.last_name FROM DUAL)" +
+            "LIKE '%?1%'"
+            ,nativeQuery = true)
+    List<Student> findByName(String name);
 
 //    @Query("Select s,g.group as group FROM Student s JOIN groups")
 //    Page<Student> findAllWithGroup(Pageable pageable);
