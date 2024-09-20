@@ -1,5 +1,6 @@
 package org.modular.cac.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,7 +16,7 @@ import java.time.LocalDateTime;
 public class Classes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long classid;
+    private Long classId;
     @Column(nullable = false)
     private String name;
     private String description;
@@ -23,4 +24,9 @@ public class Classes {
     private LocalDateTime classDate;
     private Long groupId;
     private Long professorId;
+
+    @JsonIgnore
+    public boolean isValid(){
+        return groupId != null;
+    }
 }
