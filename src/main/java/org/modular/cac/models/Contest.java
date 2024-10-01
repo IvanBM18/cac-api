@@ -24,4 +24,5 @@ public class Contest {
     private LocalDateTime startDate;
     @Column(nullable = false)
     private Long resourceId;
+    private Integer difficulty;
 }
