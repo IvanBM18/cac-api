@@ -1,13 +1,13 @@
 ALTER SESSION SET CURRENT_SCHEMA = cac;
 
 CREATE OR REPLACE VIEW STUDENT_SUBMISSIONS AS(
-    SELECT C.contest_id,
+    SELECT c.contest_id,
     c.total_problems,
     c.difficulty,
     s.verdict,
-    st.student_id
+    fp.student_id
     FROM CONTESTS c
-    JOIN SUBMISSIONS s ON c.contest_id = s.contest_id
-    JOIN CODE_PROFILES cp ON cp.code_profile_id = s.code_profile_id
-    JOIN STUDENTS st ON st.student_id = st.student_id
-);
+    LEFT JOIN SUBMISSIONS s ON s.contest_id = c.contest_id
+    LEFT JOIN (SELECT s.student_id,cp.code_profile_id FROM students s JOIN CODE_PROFILES cp ON s.student_id = cp.student_id) fp
+        ON fp.code_profile_id  = s.code_profile_id
+)
