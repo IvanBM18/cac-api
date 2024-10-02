@@ -16,9 +16,7 @@ import java.util.List;
 @AllArgsConstructor(onConstructor_ = @Autowired)
 public class ContestService {
 
-    @Autowired
     private final ContestRepository contestRepo;
-    @Autowired
     private final StudentSubmissionRepository studentSubmissionRepository;
 
     public List<StudentSubmissions> getAllContestsFromStudent(Student s){
