@@ -23,7 +23,8 @@ public class Student {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long student_id;
+    @Column(name = "student_id")
+    private Long studentId;
     private String firstName;
     private String lastName;
     @Column(unique = true)
@@ -34,7 +35,7 @@ public class Student {
     @Override
     public String toString() {
         return "{" +
-                "id=" + student_id +
+                "id=" + studentId +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", siiauCode='" + siiauCode + '\'' +

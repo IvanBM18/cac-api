@@ -37,7 +37,7 @@ public class StudentService {
     }
 
     public void addStudent(Student student){
-        if(student.getStudent_id() != null){
+        if(student.getStudentId() != null){
             throw  new IllegalArgumentException("Student must have empty id for creation");
         }
         if(repository.findBySiiauCode(student.getSiiauCode()).isPresent()){
@@ -51,7 +51,7 @@ public class StudentService {
 
 
     public void updateStudent(Student student){
-        if(student.getStudent_id() == null ||  repository.findById(student.getStudent_id()).isEmpty()){
+        if(student.getStudentId() == null ||  repository.findById(student.getStudentId()).isEmpty()){
             throw new IllegalArgumentException("Non Existent Student");
         }
         repository.save(student);

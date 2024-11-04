@@ -20,7 +20,7 @@ public class ContestService {
     private final StudentSubmissionRepository studentSubmissionRepository;
 
     public List<StudentSubmissions> getAllContestsFromStudent(Student s){
-        return studentSubmissionRepository.findSubmissionsByStudentId(s.getStudent_id());
+        return studentSubmissionRepository.findSubmissionsByStudentId(s.getStudentId());
     }
 
     public List<Contest> getAllContests(Pageable page){
