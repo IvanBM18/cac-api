@@ -4,6 +4,7 @@ ALTER SESSION SET CURRENT_SCHEMA = cac;
 CREATE OR REPLACE VIEW cac.group_attendance AS
     SELECT g.group_id,
     g.group_name,
+    a.attendance_id,
     a.student_id,
     a.class_id,
     c.name,

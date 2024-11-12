@@ -1,4 +1,4 @@
-package org.modular.cac.repositories;
+package org.modular.cac.repositories.views;
 
 import org.modular.cac.views.StudentSubmissions;
 import org.springframework.data.jpa.repository.JpaRepository;

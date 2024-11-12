@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import org.modular.cac.models.Contest;
 import org.modular.cac.models.Student;
 import org.modular.cac.repositories.ContestRepository;
-import org.modular.cac.repositories.StudentSubmissionRepository;
+import org.modular.cac.repositories.views.StudentSubmissionRepository;
 import org.modular.cac.views.StudentSubmissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
