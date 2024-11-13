@@ -27,6 +27,7 @@ public class Student {
     private Long studentId;
     private String firstName;
     private String lastName;
+    private String email;
     @Column(unique = true)
     private String siiauCode;
     @Temporal(TemporalType.TIMESTAMP)
