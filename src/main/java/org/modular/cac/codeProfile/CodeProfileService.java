@@ -24,4 +24,18 @@ public class CodeProfileService {
     public List<CodeProfile> getProfiles(Pageable page) {
         return repo.findAll(page).stream().toList();
     }
+
+    /**
+     * Like a set adds a code profile if it doesnt exists
+     * @param handle code profile to add
+     * @return id if added, if it already exists returns it
+     */
+    public Long addIfNonExistent(String handle){
+        var existentCodeProfile = repo.searchByHandle(handle);
+        if(existentCodeProfile.isPresent()){
+            return existentCodeProfile.get().getCodeProfileId();
+        }
+        var codeProfile = new CodeProfile(-1L,"CodeForces",handle,null);
+        return repo.save(codeProfile).getCodeProfileId();
+    }
 }

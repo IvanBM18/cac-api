@@ -27,4 +27,18 @@ public class ContestService {
         return contestRepo.findAll(page).stream().toList();
     }
 
+    /**
+     * Like a set adds a contest if it exists
+     * @param contest contest to add
+     * @return true if added, if it already exists returns false
+     */
+    public boolean addIfNonExistent(Contest contest){
+        contest.setContestId(contest.getContestId() == null ? -1 : contest.getContestId());
+        if(contestRepo.existsById(contest.getContestId())){
+            return false;
+        }
+        contestRepo.save(contest);
+        return true;
+    }
+
 }

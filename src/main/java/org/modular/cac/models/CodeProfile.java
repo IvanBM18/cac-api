@@ -13,7 +13,8 @@ public class CodeProfile {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long code_profile_id;
+    @Column(name = "code_profile_id")
+    private Long codeProfileId;
     @Column(nullable = false)
     private String platform;
     @Column(nullable = false)
