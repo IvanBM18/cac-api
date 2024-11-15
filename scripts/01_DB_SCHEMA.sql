@@ -66,7 +66,8 @@ CREATE TABLE cac.contests(
 	total_problems NUMBER(2) NOT NULL,
 	start_date TIMESTAMP DEFAULT SYSDATE,
 	resource_id NUMBER CONSTRAINT contest_resource_fk REFERENCES class_resources(resource_id),
-	difficulty NUMBER
+	difficulty NUMBER,
+	name VARCHAR2(256)
 );
 
 CREATE TABLE cac.submissions(

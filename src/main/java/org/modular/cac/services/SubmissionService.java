@@ -5,10 +5,11 @@ import org.modular.cac.models.Submission;
 import org.modular.cac.repositories.SubmissionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Component
+@Service
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class SubmissionService {
 

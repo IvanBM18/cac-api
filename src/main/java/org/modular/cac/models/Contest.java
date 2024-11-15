@@ -13,6 +13,7 @@ public class Contest {
 
     public Contest(){
         this.startDate = LocalDateTime.now();
+        this.name = "";
     }
 
     @Id
@@ -22,7 +23,7 @@ public class Contest {
     private Integer totalProblems;
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime startDate;
-    @Column(nullable = false)
     private Long resourceId;
     private Integer difficulty;
+    private String name;
 }

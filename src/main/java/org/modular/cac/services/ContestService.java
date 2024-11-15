@@ -1,8 +1,10 @@
 package org.modular.cac.services;
 
 import lombok.AllArgsConstructor;
+import org.modular.cac.models.ClassResource;
 import org.modular.cac.models.Contest;
 import org.modular.cac.models.Student;
+import org.modular.cac.repositories.ClassResourcesRepository;
 import org.modular.cac.repositories.ContestRepository;
 import org.modular.cac.repositories.views.StudentSubmissionRepository;
 import org.modular.cac.views.StudentSubmissions;
@@ -18,6 +20,7 @@ public class ContestService {
 
     private final ContestRepository contestRepo;
     private final StudentSubmissionRepository studentSubmissionRepository;
+    private final ClassResourceService resourceService;
 
     public List<StudentSubmissions> getAllContestsFromStudent(Student s){
         return studentSubmissionRepository.findSubmissionsByStudentId(s.getStudentId());
@@ -37,7 +40,18 @@ public class ContestService {
         if(contestRepo.existsById(contest.getContestId())){
             return false;
         }
-        contestRepo.save(contest);
+        var savedContest = contestRepo.save(contest);
+        var resource = new ClassResource(-1L, "U",
+                null,
+                null,
+                "https://codeforces.com/contest/" + savedContest.getContestId(),
+                "Contest URL For " + savedContest.getName(),
+                savedContest.getStartDate(),
+                0L,
+                null
+                );
+        savedContest.setResourceId(resourceService.add(resource));
+        contestRepo.save(savedContest);
         return true;
     }
 
