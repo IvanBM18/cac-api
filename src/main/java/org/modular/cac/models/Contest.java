@@ -17,7 +17,6 @@ public class Contest {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long contestId;
     @Column(nullable = false)
     private Integer totalProblems;

@@ -16,7 +16,6 @@ public class Submission {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long submissionId;
     @Column(nullable = false)
     private String problem;

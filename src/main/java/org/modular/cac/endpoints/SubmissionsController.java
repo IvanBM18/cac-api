@@ -3,6 +3,7 @@ package org.modular.cac.endpoints;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.modular.cac.codeProfile.CodeProfileService;
 import org.modular.cac.models.Contest;
 import org.modular.cac.models.Submission;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
+@Slf4j
 @RestController
 @RequestMapping("api/v1/submission")
 @Tag(name = "Submission",description = "API for Student Submissions")
@@ -54,6 +56,7 @@ public class SubmissionsController {
                     .peek(submission -> submission.setCodeProfileId(codeProfileId))
                     .toList();
 
+            log.info("[Submissions] saving {} submisisions for {} at contest {} with Id {}",submissions.size(), handle,contest.getName() ,contest.getContestId() );
             submissionService.saveMultipleSubmissions(submissions);
             result.addAndGet(submissions.size());
         });

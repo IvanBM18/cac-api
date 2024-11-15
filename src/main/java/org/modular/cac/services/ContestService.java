@@ -37,6 +37,7 @@ public class ContestService {
      */
     public boolean addIfNonExistent(Contest contest){
         contest.setContestId(contest.getContestId() == null ? -1 : contest.getContestId());
+        contest.setResourceId(null);
         if(contestRepo.existsById(contest.getContestId())){
             return false;
         }
