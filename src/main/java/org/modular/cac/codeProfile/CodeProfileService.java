@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -37,5 +38,9 @@ public class CodeProfileService {
         }
         var codeProfile = new CodeProfile(-1L,"CodeForces",handle,null);
         return repo.save(codeProfile).getCodeProfileId();
+    }
+
+    public CodeProfile getProfile(String handle){
+        return repo.searchByHandle(handle).orElse(new CodeProfile());
     }
 }
