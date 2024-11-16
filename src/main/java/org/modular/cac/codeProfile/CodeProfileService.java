@@ -43,4 +43,7 @@ public class CodeProfileService {
     public CodeProfile getProfile(String handle){
         return repo.searchByHandle(handle).orElse(new CodeProfile());
     }
+    public CodeProfile getProfile(Long id){
+        return repo.findById(id).orElse(new CodeProfile());
+    }
 }

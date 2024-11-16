@@ -25,8 +25,12 @@ public class CodeProfileController {
         return service.getProfiles(pagedRequest);
     }
 
-    @GetMapping("/{handle}")
+    @GetMapping("/handle/{handle}")
     public CodeProfile getCodeProfiles(@PathVariable("handle")String handle){
         return service.getProfile(handle);
+    }
+    @GetMapping("/id/{id}")
+    public CodeProfile getCodeProfiles(@PathVariable("id")Long id){
+        return service.getProfile(id);
     }
 }
