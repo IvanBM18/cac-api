@@ -29,7 +29,7 @@ public class SubmissionService {
     }
 
     public List<Submission> getAllbySiiauCode(Pageable page,String siiauCode){
-        var result = handleSubmissionsRepo.findByStudent_SiiauCode(siiauCode,page);
+        var result = handleSubmissionsRepo.findBySiiauCode(siiauCode,page);
         return result.stream().map(HandleSubmissions::mapToSubmission).toList();
     }
 
