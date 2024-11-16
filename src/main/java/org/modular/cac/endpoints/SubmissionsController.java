@@ -4,6 +4,7 @@ package org.modular.cac.endpoints;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.modular.cac.codeProfile.CodeProfileService;
 import org.modular.cac.models.Contest;
 import org.modular.cac.models.Submission;
@@ -11,11 +12,11 @@ import org.modular.cac.models.dto.ContestSummary;
 import org.modular.cac.services.ContestService;
 import org.modular.cac.services.SubmissionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -32,10 +33,38 @@ public class SubmissionsController {
 
     private final ContestService contestService;
 
-    //Get Submissions for studentId, siiauCode, codeProfileId and handle
+    @GetMapping("/")
+    public List<Submission> getSubmissions(@RequestParam(name = "page",defaultValue = "0")int page,
+                                           @RequestParam(name = "size",defaultValue = "20")int size){
+        Pageable pagedRequest = PageRequest.of(page,size);
+        return submissionService.getAllSubmissions(pagedRequest);
+    }
+    @GetMapping("/student")
+    public List<Submission> getSubmissions(@RequestParam(name = "page",defaultValue = "0")int page,
+                                           @RequestParam(name = "size",defaultValue = "20")int size,
+                                           @RequestParam(name = "id", required = false) Long studentId,
+                                           @RequestParam(name = "siiauCode", required = false) String siiauCode){
+        Pageable pagedRequest = PageRequest.of(page,size);
+        if( studentId != null && !studentId.equals((long) -1) ){
+            return submissionService.getAllbyStudentId(pagedRequest,studentId);
+        }else if ( !StringUtils.isEmpty(siiauCode)){
+            return submissionService.getAllbySiiauCode(pagedRequest,siiauCode);
+        }else {
+            return Collections.emptyList();
+        }
+    }
+
+    @GetMapping("/handle/{handle}")
+    public List<Submission> getByHandle(@RequestParam(name = "page",defaultValue = "0")int page,
+                                        @RequestParam(name = "size",defaultValue = "20")int size,
+                                        @PathVariable(name = "handle") String handle){
+        Pageable pagedRequest = PageRequest.of(page,size);
+        return submissionService.getAllbyHandle(pagedRequest,handle);
+    }
+
 
     @PostMapping("/")
-    public int addSubmission(Submission submission){
+    public int addSubmission(@RequestBody Submission submission){
         submissionService.saveSubmission(submission);
         return 1;
     }
@@ -62,6 +91,7 @@ public class SubmissionsController {
         });
         return result.get();
     }
+
 }
 
 

@@ -1,14 +1,16 @@
 package org.modular.cac.models.views;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
+import org.modular.cac.models.Submission;
 
 @Data
 @Entity
-@Table(name = "group_attendance")
+@Table(name = "handle_submissions")
 public class HandleSubmissions {
 
     @Id
@@ -44,4 +46,9 @@ public class HandleSubmissions {
 
     @Column(name = "resource_id")
     private Long resourceId;
+
+    @JsonIgnore
+    public Submission mapToSubmission(){
+        return new Submission(submissionId,problem,verdict,0,codeProfileId,contestId);
+    }
 }
