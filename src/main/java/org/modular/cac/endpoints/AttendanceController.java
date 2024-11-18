@@ -3,11 +3,13 @@ package org.modular.cac.endpoints;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.modular.cac.models.Attendance;
+import org.modular.cac.models.dto.FullAttendance;
 import org.modular.cac.models.views.GroupAttendance;
 import org.modular.cac.services.AttendanceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,6 +28,12 @@ public class AttendanceController {
                                    @RequestParam(name = "size",defaultValue = "20")int size){
         Pageable pageRequest = PageRequest.of(page, size);
         return service.getAll(pageRequest);
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<FullAttendance>> getAll(){
+
+        return ResponseEntity.ok(service.getFullAttendance());
     }
 
     @GetMapping("/student/{id}")

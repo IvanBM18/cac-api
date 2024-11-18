@@ -32,14 +32,13 @@ public class StudentService {
         return repository.findBySiiauCode(siiauCode);
     }
 
-    public List<Student> searchStudentsByName(String name){
+    public List<Student> searchStudentsByName(String firstName, String lastName){
+        var name = firstName + lastName;
         return repository.findByName(name);
     }
 
     public void addStudent(Student student){
-        if(student.getStudentId() != null){
-            throw  new IllegalArgumentException("Student must have empty id for creation");
-        }
+        student.setStudentId((long) (-1));
         if(repository.findBySiiauCode(student.getSiiauCode()).isPresent()){
             throw new IllegalStateException("Siiau Code already taken by another student");
         }
@@ -47,6 +46,11 @@ public class StudentService {
             throw new IllegalArgumentException("Invalid Siiau Code");
         }
         repository.save(student);
+    }
+
+    public Student addStudentWithoutCode(Student student){
+        student.setStudentId((long) (-1));
+        return repository.save(student);
     }
 
 

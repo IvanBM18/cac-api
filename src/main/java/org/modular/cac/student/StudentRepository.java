@@ -18,9 +18,10 @@ public interface StudentRepository extends PagingAndSortingRepository<Student,Lo
     Optional<Student> findBySiiauCode(String code);
 
     @Query( value = "Select * FROM Students s " +
-            "WHERE (Select s.first_name || s.last_name FROM DUAL)" +
-            "LIKE '%?1%'"
+            "WHERE (Select lower(s.first_name || s.last_name) FROM DUAL)" +
+            "LIKE '%' || ?1 || '%'"
             ,nativeQuery = true)
+    //TODO: Test this
     List<Student> findByName(String name);
 
 //    @Query("Select s,g.group as group FROM Student s JOIN groups")
