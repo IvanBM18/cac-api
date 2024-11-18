@@ -1,7 +1,7 @@
 package org.modular.cac.repositories;
 
 import org.modular.cac.models.Classes;
-import org.springframework.data.domain.Pageable;
+import org.modular.cac.models.dto.FullAttendance;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
@@ -27,4 +27,14 @@ public interface SubjectsRepository extends PagingAndSortingRepository<Classes,L
     @Query(value = "SELECT * FROM classes c WHERE EXTRACT(MONTH FROM c.class_date) = :month AND EXTRACT(DAY FROM c.class_date) = :day",
             nativeQuery = true)
     List<Classes> findClassesByDayAndMonth(@Param("day") int day, @Param("month") int month);
+
+    @Query(value = """
+        SELECT c.class_id AS classId, c.name AS className, c.description AS classDescription, c.class_date AS classDate,
+               s.student_id AS studentId, s.first_name AS firstName, s.last_name AS lastName, s.email AS email, s.siiau_code AS siiauCode,
+               a.attendance_id AS attendanceId
+        FROM cac.classes c
+        LEFT JOIN cac.attendances a ON c.class_id = a.class_id
+        JOIN cac.students s ON s.student_id = a.student_id
+    """, nativeQuery = true)
+    List<FullAttendance> findClassAttendances();
 }

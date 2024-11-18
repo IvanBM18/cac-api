@@ -9,11 +9,10 @@ import org.modular.cac.models.dto.FullAttendance;
 import org.modular.cac.models.dto.RowData;
 import org.modular.cac.models.views.GroupAttendance;
 import org.modular.cac.repositories.AttendanceRepository;
-import org.modular.cac.repositories.dto.FullAttendanceRepository;
+import org.modular.cac.repositories.SubjectsRepository;
 import org.modular.cac.repositories.views.GroupAttendanceRepository;
 import org.modular.cac.student.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cglib.core.Local;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
@@ -34,7 +33,7 @@ public class AttendanceService {
     private final GroupAttendanceRepository groupAttendance;
 
     private final AttendanceRepository attendanceRepository;
-    private final FullAttendanceRepository fullAttendanceRepository;
+    private final SubjectsRepository subjectsRepository;
 
     private final StudentService studentService;
 
@@ -126,6 +125,6 @@ public class AttendanceService {
 
     public List<FullAttendance> getFullAttendance(){
 
-        return fullAttendanceRepository.findClassAttendances();
+        return subjectsRepository.findClassAttendances();
     }
 }
