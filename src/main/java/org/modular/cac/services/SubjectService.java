@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,18 +30,22 @@ public class SubjectService {
         return repository.findByGroupName(groupName);
     }
 
+    public Optional<Classes> getSubjectByDate(int month, int day){
+        return Optional.of(repository.findClassesByDayAndMonth(month,day).get(0));
+    }
+
     public Optional<Classes> findSubject(Long id){
         return repository.findById(id);
     }
 
-    public void addNewSubject(Classes newSubject){
+    public Classes addNewSubject(Classes newSubject){
         if(newSubject.getClassId() != null){
             throw new IllegalArgumentException("Subjects must have empty id for creation");
         }
         if(!newSubject.isValid()){
             throw new IllegalStateException("Subjects must be linked to a group");
         }
-        repository.save(newSubject);
+        return repository.save(newSubject);
     }
 
     public void updateSubject(Classes subject){

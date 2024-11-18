@@ -23,4 +23,8 @@ public interface SubjectsRepository extends PagingAndSortingRepository<Classes,L
             "    ON g.group_name = :groupName"
             ,nativeQuery = true)
     List<Classes> findByGroupName(@Param("groupName") String groupName);
+
+    @Query(value = "SELECT * FROM classes c WHERE EXTRACT(MONTH FROM c.class_date) = :month AND EXTRACT(DAY FROM c.class_date) = :day",
+            nativeQuery = true)
+    List<Classes> findClassesByDayAndMonth(@Param("day") int day, @Param("month") int month);
 }
