@@ -125,6 +125,30 @@ public class AttendanceService {
 
     public List<FullAttendance> getFullAttendance(){
 
-        return subjectsRepository.findFullAttendance();
+        List<Object[]> result = subjectsRepository.findFullAttendance();
+        List<FullAttendance> fullAttendances = new ArrayList<>();
+
+        for (Object[] row : result) {
+            Long classId = (Long) row[0];
+            String className = (String) row[1];
+            String classDescription = (String) row[2];
+            LocalDateTime classDate = (LocalDateTime) row[3];
+            Long studentId = (Long) row[4];
+            String firstName = (String) row[5];
+            String lastName = (String) row[6];
+            String email = (String) row[7];
+            String siiauCode = (String) row[8];
+            Long attendanceId = (Long) row[9];
+
+            FullAttendance fullAttendance = new FullAttendance(
+                    classId, className, classDescription, classDate,
+                    studentId, firstName, lastName, email, siiauCode,
+                    attendanceId
+            );
+
+            fullAttendances.add(fullAttendance);
+        }
+
+        return fullAttendances;
     }
 }

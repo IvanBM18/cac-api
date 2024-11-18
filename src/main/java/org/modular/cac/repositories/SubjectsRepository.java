@@ -42,6 +42,7 @@ public interface SubjectsRepository extends PagingAndSortingRepository<Classes,L
             "LEFT JOIN attendances a ON c.class_id = a.class_id " +
             "JOIN students s ON s.student_id = a.student_id",
             nativeQuery = true)
-    List<FullAttendance> findFullAttendance();
+    List<Object[]> findFullAttendance();
+
 
 }
