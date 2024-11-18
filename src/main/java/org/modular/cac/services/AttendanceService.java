@@ -125,6 +125,6 @@ public class AttendanceService {
 
     public List<FullAttendance> getFullAttendance(){
 
-        return subjectsRepository.findClassAttendances();
+        return subjectsRepository.findFullAttendance();
     }
 }
