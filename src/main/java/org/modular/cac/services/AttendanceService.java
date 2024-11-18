@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.TextStyle;
 import java.util.ArrayList;
@@ -129,16 +130,16 @@ public class AttendanceService {
         List<FullAttendance> fullAttendances = new ArrayList<>();
 
         for (Object[] row : result) {
-            Long classId = (Long) row[0];
+            Long classId = ((BigDecimal)row[0]).longValue() ;
             String className = (String) row[1];
             String classDescription = (String) row[2];
             LocalDateTime classDate = (LocalDateTime) row[3];
-            Long studentId = (Long) row[4];
+            Long studentId = ((BigDecimal) row[4]).longValue();
             String firstName = (String) row[5];
             String lastName = (String) row[6];
             String email = (String) row[7];
             String siiauCode = (String) row[8];
-            Long attendanceId = (Long) row[9];
+            Long attendanceId = ((BigDecimal) row[9]).longValue();
 
             FullAttendance fullAttendance = new FullAttendance(
                     classId, className, classDescription, classDate,
