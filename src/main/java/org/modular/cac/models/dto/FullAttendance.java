@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Data
 @AllArgsConstructor
@@ -26,4 +28,21 @@ public class FullAttendance {
 
     // Field from the `attendances` table
     private Long attendanceId;
+
+    public static List<RowData> mapToRowData(List<FullAttendance> fullAttendances) {
+        // Agrupar FullAttendance por lastName y firstName (por estudiante)
+        return fullAttendances.stream()
+                .collect(Collectors.groupingBy(
+                        fa -> new AbstractMap.SimpleEntry<>(fa.getLastName(), fa.getFirstName()), // Agrupar por apellido y nombre
+                        Collectors.mapping(FullAttendance::getClassDate, Collectors.toList()) // Recopilar las fechas de las clases (attendances)
+                ))
+                .entrySet()
+                .stream()
+                .map(entry -> new RowData(
+                        entry.getKey().getKey(), // lastName
+                        entry.getKey().getValue(), // firstName
+                        entry.getValue() // Lista de attendances
+                ))
+                .collect(Collectors.toList());
+    }
 }

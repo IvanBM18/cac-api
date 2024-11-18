@@ -1,63 +1,46 @@
-package org.modular.cac.utils;
+package org.modular.cac;
 
-import lombok.experimental.UtilityClass;
 import org.dhatim.fastexcel.Workbook;
 import org.dhatim.fastexcel.Worksheet;
-import org.modular.cac.TestExport;
-import org.modular.cac.models.dto.FullAttendance;
-import org.modular.cac.models.dto.RowData;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.Month;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.TemporalAccessor;
 import java.util.*;
-import java.util.function.Predicate;
 
-@UtilityClass
-public class AttendanceUtils {
+public class TestExport {
 
-    public static LocalDateTime getDateFrom(Month month, Integer day){
-        int year = LocalDate.now().getYear();
-        var date = LocalDate.of(year,month,day);
+    public static class RowData {
+        private String lastName;
+        private String firstName;
+        private List<LocalDateTime> attendances;
 
-        return date.atStartOfDay();
-    }
-
-    public static Month parseMonth(String month){
-        try{
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM", new Locale("es", "MX"));
-            TemporalAccessor temporal = formatter.parse(month.toLowerCase());
-            return  Month.from(temporal);
-        }catch (Exception e){
-            return null;
+        public RowData(String lastName, String firstName, List<LocalDateTime> attendances) {
+            this.lastName = lastName;
+            this.firstName = firstName;
+            this.attendances = attendances;
         }
 
+        public String getLastName() {
+            return lastName;
+        }
+
+        public String getFirstName() {
+            return firstName;
+        }
+
+        public List<LocalDateTime> getAttendances() {
+            return attendances;
+        }
     }
 
-    public static Predicate<FullAttendance> filterbyMonthRange(int fromMonth, int toMonth) {
-        return fa -> {
-            int classMonth = fa.getClassDate().getMonthValue();
-            return classMonth >= fromMonth && classMonth <= toMonth;
-        };
-    }
+    public static void main(String[] args) throws IOException {
+        // Datos de ejemplo
+        List<RowData> data = createSampleData();
 
-    public static Predicate<FullAttendance> filterStartingByMonth(int fromMonth) {
-        return fa -> fa.getClassDate().getMonthValue() == fromMonth;
-    }
-
-    public static Predicate<FullAttendance> filterMonthNotOverGivenMonth(int toMonth) {
-        return fa -> fa.getClassDate().getMonthValue() <= toMonth;
-    }
-
-    public Path exportAttendance(List<RowData> data) throws IOException {
-        var outputPath = Paths.get("").resolve("output.xlsx");
-        try (FileOutputStream fos = new FileOutputStream(outputPath.toAbsolutePath().toString()) ) {
+        // Generar archivo Excel
+        try (FileOutputStream fos = new FileOutputStream("output.xlsx")) {
             Workbook workbook = new Workbook(fos, "My Application", "1.0");
             Worksheet worksheet = workbook.newWorksheet("Asistencias");
 
@@ -70,8 +53,6 @@ public class AttendanceUtils {
             // Guardar archivo
             workbook.finish();
         }
-
-        return outputPath.toAbsolutePath();
     }
 
     private static Map<String, Integer> writeHeaders(Worksheet worksheet, List<RowData> data) {
@@ -128,4 +109,21 @@ public class AttendanceUtils {
         }
     }
 
+    private static List<RowData> createSampleData() {
+        List<RowData> data = new ArrayList<>();
+
+        data.add(new RowData("Doe", "John", List.of(
+                LocalDateTime.of(2024, 11, 1, 10, 0),
+                LocalDateTime.of(2024, 11, 3, 10, 0),
+                LocalDateTime.of(2024, 12, 2, 10, 0),
+                LocalDateTime.of(2024, 12, 5, 10, 0)
+        )));
+
+        data.add(new RowData("Smith", "Jane", List.of(
+                LocalDateTime.of(2024, 12, 2, 10, 0),
+                LocalDateTime.of(2024, 11, 3, 10, 0)
+        )));
+
+        return data;
+    }
 }
