@@ -17,6 +17,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.TextStyle;
 import java.util.ArrayList;
@@ -133,7 +134,7 @@ public class AttendanceService {
             Long classId = ((BigDecimal)row[0]).longValue() ;
             String className = (String) row[1];
             String classDescription = (String) row[2];
-            LocalDateTime classDate = (LocalDateTime) row[3];
+            LocalDateTime classDate = ((Timestamp) row[3]).toLocalDateTime();
             Long studentId = ((BigDecimal) row[4]).longValue();
             String firstName = (String) row[5];
             String lastName = (String) row[6];
