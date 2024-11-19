@@ -40,6 +40,12 @@ public class StudentController {
         return service.searchStudentByCode(siiauCode).orElse(new Student());
     }
 
+    @GetMapping(path = "/name")
+    public ResponseEntity<List<Student>> getStudentByCode(@RequestParam(name = "firstName") String firstName,
+                                                          @RequestParam(name = "lastName") String lastName){
+        return ResponseEntity.ok(service.searchStudentsByName(firstName,lastName));
+    }
+
     @PostMapping
     public ResponseEntity<Student> addnewStudent(@RequestBody Student newStudent){
         return ResponseEntity.ok(service.addStudent(newStudent));
