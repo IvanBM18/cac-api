@@ -37,7 +37,7 @@ public class StudentService {
         return repository.findByName(name);
     }
 
-    public void addStudent(Student student){
+    public Student addStudent(Student student){
         student.setStudentId((long) (-1));
         if(repository.findBySiiauCode(student.getSiiauCode()).isPresent()){
             throw new IllegalStateException("Siiau Code already taken by another student");
@@ -45,7 +45,7 @@ public class StudentService {
         if(!student.isValid()){
             throw new IllegalArgumentException("Invalid Siiau Code");
         }
-        repository.save(student);
+        return repository.save(student);
     }
 
     public Student addStudentWithoutCode(Student student){

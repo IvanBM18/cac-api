@@ -6,6 +6,7 @@ import org.modular.cac.student.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -39,11 +40,9 @@ public class StudentController {
         return service.searchStudentByCode(siiauCode).orElse(new Student());
     }
 
-
-
     @PostMapping
-    public void addnewStudent(@RequestBody Student newStudent){
-        service.addStudent(newStudent);
+    public ResponseEntity<Student> addnewStudent(@RequestBody Student newStudent){
+        return ResponseEntity.ok(service.addStudent(newStudent));
     }
 
     @PutMapping
