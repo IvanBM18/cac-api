@@ -37,6 +37,10 @@ public class StudentService {
         return repository.findByName(name);
     }
 
+    public Optional<Student> searchByEmail(String email){
+        return repository.findByEmail(email);
+    }
+
     public Student addStudent(Student student){
         student.setStudentId((long) (-1));
         if(repository.findBySiiauCode(student.getSiiauCode()).isPresent()){
