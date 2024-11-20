@@ -92,7 +92,7 @@ public class UserService {
     }
 
     public FullUser login(String email, String password) throws CredentialNotFoundException {
-        var searchedUser = fullUser.searchByEmailAnAndPassword(email,password);
+        var searchedUser = fullUser.searchByEmailAndPassword(email,password);
         if(searchedUser.isEmpty()){
             throw new CredentialNotFoundException("User with given email and password not found");
         }

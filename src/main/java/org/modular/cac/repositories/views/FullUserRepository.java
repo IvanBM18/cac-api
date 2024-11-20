@@ -21,5 +21,5 @@ public interface FullUserRepository extends JpaRepository<FullUser,Long> {
     @Query(nativeQuery = true, name = """
             SELECT * FROM full_users WHERE email = :email AND password = :pwd
             """)
-    public Optional<FullUser> searchByEmailAnAndPassword(@Param("email")String email, @Param("pwd")String password);
+    public Optional<FullUser> searchByEmailAndPassword(@Param("email")String email, @Param("pwd")String password);
 }
