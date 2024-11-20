@@ -28,6 +28,7 @@ public class Student {
     private String firstName;
     private String lastName;
     private String email;
+    @Column(unique = true,name = "siiau_code")
     private String siiauCode;
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime registerDate;
