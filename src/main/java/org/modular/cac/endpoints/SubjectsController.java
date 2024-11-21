@@ -36,7 +36,7 @@ public class SubjectsController {
     }
 
 
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public Classes getSubjectById(@PathVariable("id")Long id){
         return service.findSubject(id).orElse(new Classes());
     }
