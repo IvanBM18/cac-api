@@ -62,4 +62,8 @@ public class SubjectService {
         }
         throw new IllegalStateException("Non Existent Suybject Id");
     }
+
+    public List<Classes> getWithoutAttendance(){
+        return repository.findClassesWithoutAttendance();
+    }
 }

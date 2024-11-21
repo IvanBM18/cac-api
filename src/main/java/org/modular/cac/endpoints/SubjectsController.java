@@ -41,6 +41,10 @@ public class SubjectsController {
         return service.findSubject(id).orElse(new Classes());
     }
 
+    @GetMapping("/no-attendance")
+    public List<Classes> getClassesWithoutAttendance(){
+        return service.getWithoutAttendance();
+    }
 
     @PutMapping
     public void updateStudent(@RequestBody Classes student){
