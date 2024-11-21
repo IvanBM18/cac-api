@@ -15,8 +15,8 @@ VALUES('Alexa','Salcedo Arellano',TO_DATE('2024 Dec 12','YYYY MON DD'),'21665432
 INSERT INTO students(first_name,last_name,register_date,siiau_code,email)
 VALUES('Argenis','Algo Robles',TO_DATE('2024 Aug 31','YYYY MON DD'),'216101010','Argenis.lopez@alumnos.udg.mx');
 
-INSERT INTO users(email,password,student_id)
-VALUES ('ivanbarba.m@gmail.com','123456',0);
+INSERT INTO users(password,student_id)
+VALUES ('123456',0);
 
 INSERT INTO groups
 VALUES(DEFAULT,'Basicos');
@@ -25,8 +25,6 @@ VALUES(DEFAULT,'Intermedios');
 
 INSERT INTO code_profiles(platform,identifier,student_id)
 VALUES('CodeForces','ivanbm',0);
-INSERT INTO code_profiles(platform,identifier,student_id)
-VALUES('VJudge','ivanbm8',0);
 
 INSERT INTO classes
 VALUES(DEFAULT,'Strings I','Introduccion a Strings', TO_DATE('2024 FEB 07','YYYY MON DD'),0,0);
@@ -49,5 +47,5 @@ INSERT INTO attendances
 VALUES(DEFAULT,3,0);
 
 INSERT INTO contests
-VALUES(0,7,DEFAULT,0,1283);
+VALUES(0,7,DEFAULT,0,1100,1283);
 COMMIT;
