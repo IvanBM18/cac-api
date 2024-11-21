@@ -19,24 +19,24 @@ public class SubmissionService {
     private final SubmissionRepository repo;
     private final HandleSubmissionsRepository handleSubmissionsRepo;
 
-    public List<Submission> getAllSubmissions(Pageable page){
-        return repo.findAll(page).stream().toList();
+    public List<HandleSubmissions> getAllSubmissions(Pageable page){
+        return handleSubmissionsRepo.findAll(page).stream().toList();
     }
 
-    public List<Submission> getAllbyStudentId(Pageable page,Long id){
+    public List<HandleSubmissions> getAllbyStudentId(Pageable page,Long id){
         var result = handleSubmissionsRepo.findByStudentId(id,page);
-        return result.stream().map(HandleSubmissions::mapToSubmission).toList();
+        return result.stream().toList();
     }
 
-    public List<Submission> getAllbySiiauCode(Pageable page,String siiauCode){
+    public List<HandleSubmissions> getAllbySiiauCode(Pageable page,String siiauCode){
         var result = handleSubmissionsRepo.findBySiiauCode(siiauCode,page);
-        return result.stream().map(HandleSubmissions::mapToSubmission).toList();
+        return result.stream().toList();
     }
 
 
-    public List<Submission> getAllbyHandle(Pageable page,String handle){
+    public List<HandleSubmissions> getAllbyHandle(Pageable page,String handle){
         var result = handleSubmissionsRepo.findByIdentifier(handle,page);
-        return result.stream().map(HandleSubmissions::mapToSubmission).toList();
+        return result.stream().toList();
     }
 
 

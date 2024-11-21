@@ -9,11 +9,13 @@ import org.modular.cac.codeProfile.CodeProfileService;
 import org.modular.cac.models.Contest;
 import org.modular.cac.models.Submission;
 import org.modular.cac.models.dto.ContestSummary;
+import org.modular.cac.models.views.HandleSubmissions;
 import org.modular.cac.services.ContestService;
 import org.modular.cac.services.SubmissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
@@ -33,37 +35,37 @@ public class SubmissionsController {
 
     private final ContestService contestService;
 
-    @GetMapping("/")
-    public List<Submission> getSubmissions(@RequestParam(name = "page",defaultValue = "0")int page,
-                                           @RequestParam(name = "size",defaultValue = "20")int size){
+    @GetMapping("")
+    public List<HandleSubmissions> getSubmissions(@RequestParam(name = "page",defaultValue = "0")int page,
+                                                  @RequestParam(name = "size",defaultValue = "20")int size){
         Pageable pagedRequest = PageRequest.of(page,size);
         return submissionService.getAllSubmissions(pagedRequest);
     }
     @GetMapping("/student")
-    public List<Submission> getSubmissions(@RequestParam(name = "page",defaultValue = "0")int page,
-                                           @RequestParam(name = "size",defaultValue = "20")int size,
-                                           @RequestParam(name = "id", required = false) Long studentId,
-                                           @RequestParam(name = "siiauCode", required = false) String siiauCode){
+    public ResponseEntity<List<HandleSubmissions>> getSubmissions(@RequestParam(name = "page",defaultValue = "0")int page,
+                                                                 @RequestParam(name = "size",defaultValue = "20")int size,
+                                                                 @RequestParam(name = "id", required = false) Long studentId,
+                                                                 @RequestParam(name = "siiauCode", required = false) String siiauCode){
         Pageable pagedRequest = PageRequest.of(page,size);
         if( studentId != null && !studentId.equals((long) -1) ){
-            return submissionService.getAllbyStudentId(pagedRequest,studentId);
+            return ResponseEntity.ok(submissionService.getAllbyStudentId(pagedRequest,studentId));
         }else if ( !StringUtils.isEmpty(siiauCode)){
-            return submissionService.getAllbySiiauCode(pagedRequest,siiauCode);
+            return ResponseEntity.ok(submissionService.getAllbySiiauCode(pagedRequest,siiauCode));
         }else {
-            return Collections.emptyList();
+            return ResponseEntity.badRequest().body( Collections.emptyList());
         }
     }
 
     @GetMapping("/handle/{handle}")
-    public List<Submission> getByHandle(@RequestParam(name = "page",defaultValue = "0")int page,
+    public ResponseEntity<List<HandleSubmissions>> getByHandle(@RequestParam(name = "page",defaultValue = "0")int page,
                                         @RequestParam(name = "size",defaultValue = "20")int size,
                                         @PathVariable(name = "handle") String handle){
         Pageable pagedRequest = PageRequest.of(page,size);
-        return submissionService.getAllbyHandle(pagedRequest,handle);
+        return ResponseEntity.ok(submissionService.getAllbyHandle(pagedRequest,handle));
     }
 
 
-    @PostMapping("/")
+    @PostMapping("")
     public int addSubmission(@RequestBody Submission submission){
         submissionService.saveSubmission(submission);
         return 1;
