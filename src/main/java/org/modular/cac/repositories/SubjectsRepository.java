@@ -46,12 +46,12 @@ public interface SubjectsRepository extends PagingAndSortingRepository<Classes,L
 
     @Query(nativeQuery = true,value = """ 
             SELECT c.class_id, c.name, c.description, c.class_date, c.group_id, c.professor_id
-            FROM cac.classes c
+            FROM classes c
             WHERE NOT EXISTS (
                 SELECT 1
-                FROM cac.attendances a
+                FROM attendances a
                 WHERE a.class_id = c.class_id
-            );
+            )
             """)
     public List<Classes> findClassesWithoutAttendance();
 
