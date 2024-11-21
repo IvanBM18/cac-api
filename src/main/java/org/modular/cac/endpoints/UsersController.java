@@ -19,7 +19,7 @@ import javax.security.auth.login.CredentialNotFoundException;
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class UsersController {
 
-    UserService service;
+    private final UserService service;
 
 
     @PostMapping
