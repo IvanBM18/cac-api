@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import javax.swing.text.html.Option;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,7 +32,8 @@ public class SubjectService {
     }
 
     public Optional<Classes> getSubjectByDate(int month, int day){
-        return Optional.of(repository.findClassesByDayAndMonth(month,day).get(0));
+        var result = repository.findClassesByDayAndMonth(month,day);
+        return Optional.ofNullable(result.isEmpty() ? null : result.get(0));
     }
 
     public Optional<Classes> findSubject(Long id){
@@ -39,7 +41,7 @@ public class SubjectService {
     }
 
     public Classes addNewSubject(Classes newSubject){
-        if(newSubject.getClassId() != null){
+        if(newSubject.getClassId() != null && newSubject.getClassId() >= 0){
             throw new IllegalArgumentException("Subjects must have empty id for creation");
         }
         if(!newSubject.isValid()){
@@ -65,5 +67,12 @@ public class SubjectService {
 
     public List<Classes> getWithoutAttendance(){
         return repository.findClassesWithoutAttendance();
+    }
+
+    public List<Classes> getAbsolutelyAll(){
+       var result = repository.findAll();
+       var allClasses = new ArrayList<Classes>();
+       result.forEach(i -> allClasses.add(i));
+       return allClasses;
     }
 }

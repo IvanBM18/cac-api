@@ -1,6 +1,7 @@
 package org.modular.cac.endpoints;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.dhatim.fastexcel.reader.Cell;
@@ -12,6 +13,7 @@ import org.modular.cac.models.dto.RowData;
 import org.modular.cac.models.dto.ColumnValue;
 import org.modular.cac.services.AttendanceService;
 import org.modular.cac.utils.AttendanceUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpHeaders;
@@ -35,11 +37,12 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("api/v1/file")
 @Tag(name = "Import/Export",description = "API for Importing and Exporting metadata from .xslx fil")
+@RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class ExcelController {
 
     public static final String tempDir = "temp";
 
-    AttendanceService attendanceService;
+    private final AttendanceService attendanceService;
 
     @PostMapping("/import")
     public ResponseEntity<String> uploadAssistance(@RequestBody MultipartFile file){

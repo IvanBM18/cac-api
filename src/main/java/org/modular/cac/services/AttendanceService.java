@@ -92,10 +92,9 @@ public class AttendanceService {
         var subject = classService.getSubjectByDate(dateOfClass.getMonthValue(),dateOfClass.getDayOfMonth());
         Classes actualSubject;
         actualSubject = subject.orElseGet(() ->
-                classService.addNewSubject(new Classes(-1L, tempName, "", dateOfClass, 0L, -1L)));
+                classService.addNewSubject(new Classes(-1L, tempName, "", dateOfClass, 0L, null)));
 
         attendance.setClassId(actualSubject.getClassId());
-        //TOODO: Check if already exists an attendance for given subject, if not add it
         attendanceRepository.save(attendance);
     }
 
@@ -105,21 +104,26 @@ public class AttendanceService {
             final AtomicLong studentId = new AtomicLong(-1L);
             String lastName = i.getLastName();
             String firstName = i .getFirstName();
+            if(lastName != null && firstName != null){
+                var referencedStudents = studentService.searchStudentsByName(firstName.toLowerCase(),lastName.toLowerCase());
+                if(referencedStudents.size() > 1){
+                    result.add(i);
+                }else if (referencedStudents.isEmpty()){
+                    var currentStudent = new Student(-1L,firstName,lastName,"","", LocalDateTime.now());
+                    studentId.set(studentService.addStudentWithoutCode(currentStudent).getStudentId());
+                }else {
+                    studentId.set(referencedStudents.get(0).getStudentId());
+                }
 
-            var referencedStudents = studentService.searchStudentsByName(firstName.toLowerCase(),lastName.toLowerCase());
-            if(referencedStudents.size() > 1){
-                result.add(i);
-            }else if (referencedStudents.isEmpty()){
-                var currentStudent = new Student(-1L,firstName,lastName,"","", LocalDateTime.now());
-                studentId.set(studentService.addStudentWithoutCode(currentStudent).getStudentId());
-            }else {
-                studentId.set(referencedStudents.get(0).getStudentId());
-            }
-
-            if(studentId.get() != -1L){
-                i.getAttendances().forEach(date -> {
-                    addAttendanceWithoutClass(new Attendance(-1L, studentId.get(), -1L),date);
-                });
+                if(studentId.get() != -1L){
+                    i.getAttendances().forEach(date -> {
+                        try{
+                            addAttendanceWithoutClass(new Attendance(-1L, studentId.get(), -1L),date);
+                        }catch (Exception e){
+                            log.warn("Attendance for {} at {}, not saved: {}",studentId.get(),date.toLocalDate().toString(), e.getMessage());
+                        }
+                    });
+                }
             }
         });
         return result;
@@ -152,5 +156,12 @@ public class AttendanceService {
         }
 
         return fullAttendances;
+    }
+
+    public List<Attendance> getAbsolutelyAll(){
+        var result = attendanceRepository.findAll();
+        var allClasses = new ArrayList<Attendance>();
+        result.forEach(allClasses::add);
+        return allClasses;
     }
 }

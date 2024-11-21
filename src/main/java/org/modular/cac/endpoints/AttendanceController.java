@@ -30,6 +30,12 @@ public class AttendanceController {
         return service.getAll(pageRequest);
     }
 
+    @GetMapping("/abs/all")
+    public ResponseEntity<List<Attendance>> getAbsAll(){
+
+        return ResponseEntity.ok(service.getAbsolutelyAll());
+    }
+
     @GetMapping("/all")
     public ResponseEntity<List<FullAttendance>> getAll(){
 

@@ -40,7 +40,7 @@ CREATE TABLE cac.classes(
 	description varchar2(256),
 	class_date TIMESTAMP,
     group_id NUMBER NOT NULL CONSTRAINT class_group_fk REFERENCES groups(group_id),
-	professor_id  NUMBER NOT NULL CONSTRAINT resource_user_fk REFERENCES users(user_id)
+	professor_id NUMBER  CONSTRAINT resource_user_fk REFERENCES users(user_id)
 );
 
 CREATE TABLE cac.class_resources(
@@ -51,7 +51,7 @@ CREATE TABLE cac.class_resources(
 	content_url varchar2(256),
 	description varchar2(512),
 	upload_date TIMESTAMP DEFAULT SYSDATE,
-	user_id NUMBER NOT NULL CONSTRAINT class_professor_fk REFERENCES students(student_id),
+	user_id NUMBER  CONSTRAINT class_professor_fk REFERENCES students(student_id),
 	class_id NUMBER  CONSTRAINT resource_class_fk REFERENCES classes(class_id)
 );
 

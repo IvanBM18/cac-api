@@ -1,11 +1,14 @@
 package org.modular.cac.student;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.modular.cac.models.Classes;
 import org.modular.cac.models.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -71,5 +74,12 @@ public class StudentService {
             return true;
         }
         throw new IllegalStateException("Non Existent Student Id");
+    }
+
+    public List<Student> getAbsolutelyAll(){
+        var result = repository.findAll();
+        var allClasses = new ArrayList<Student>();
+        result.forEach(i -> allClasses.add(i));
+        return allClasses;
     }
 }

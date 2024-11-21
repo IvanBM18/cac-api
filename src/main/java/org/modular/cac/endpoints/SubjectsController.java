@@ -46,6 +46,13 @@ public class SubjectsController {
         return service.getWithoutAttendance();
     }
 
+
+
+    @GetMapping("/all")
+    public List<Classes> getAll(){
+        return service.getAbsolutelyAll();
+    }
+
     @PutMapping
     public void updateStudent(@RequestBody Classes student){
         service.updateSubject(student);

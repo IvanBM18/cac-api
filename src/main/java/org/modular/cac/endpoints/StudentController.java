@@ -40,6 +40,11 @@ public class StudentController {
         return service.searchStudentByCode(siiauCode).orElse(new Student());
     }
 
+    @GetMapping(path = "/all")
+    public List<Student> getAbsolutelyAll(){
+        return service.getAbsolutelyAll();
+    }
+
     @GetMapping(path = "/name")
     public ResponseEntity<List<Student>> getStudentByCode(@RequestParam(name = "firstName") String firstName,
                                                           @RequestParam(name = "lastName") String lastName){
